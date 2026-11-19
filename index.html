@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <title>Pondering Mushaf</title>
-<style>@font-face{font-family:'KFGQPC Hafs';src:url(hafs.woff2) format('woff2');font-display:block}</style><style>@font-face{font-family:'KFGQPC Text';src:url(hafs.woff2) format('woff2');unicode-range:U+0020-007F,U+00A0,U+0600-060B,U+060D-061A,U+061C-061E,U+0620-065F,U+066A-06EF,U+06FA-06FF,U+2000-206F,U+FDF0-FDFF;font-display:block}</style>
+<style>@font-face{font-family:'KFGQPC Hafs';src:url(hafs.woff2) format('woff2');font-display:block}</style><style>@font-face{font-family:'KFGQPC Text';src:url(hafs.woff2) format('woff2');unicode-range:U+0020-007F,U+00A0,U+0600-060B,U+060D-061A,U+061C-061E,U+0620-0669,U+066A-06EF,U+06FA-06FF,U+2000-206F,U+FDF0-FDFF;font-display:block}</style>
 <style>
 :root{--pgi:#000;--pgb:#fff;--pgd:#cfcfcf;--pgl:#777;--teal:#117a70;--pill:#f2e6c9;--paper:#faf6ee;--mink:#262522;--frame:#b58b2a;--lh:2.2;--bg:#eef2f1;--panel:#fff;--ink:#12343b;--mute:#5c767b;--line:#cfdcdb;--gold:#b8892b;--accent:#12343b;--onaccent:#fff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -31,7 +31,7 @@ main{max-width:640px;margin:0 auto;padding:16px 16px 48px}
 .v{cursor:pointer;border-radius:6px;padding:0 2px}
 .v:active,.v.sel{background:color-mix(in srgb,var(--gold) 25%,transparent)}
 .v.has{text-decoration:underline dotted var(--gold);text-decoration-thickness:2px;text-underline-offset:10px}
-.end{color:var(--gold);font-size:.8em}
+.end{color:var(--gold);font-size:.8em;font-family:'KFGQPC Hafs',serif;unicode-bidi:isolate}
 .hint,.mute{color:var(--mute);font-size:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 12px}
 .card .ar{font-size:24px;line-height:2;margin:0 0 8px}
@@ -60,7 +60,7 @@ nav button,.btn,.datebtn{font-size:15px}
 .w{cursor:pointer}.w:active{opacity:.6}
 .w.nt{text-decoration:underline dotted var(--gold);text-decoration-thickness:2px;text-underline-offset:.25em}
 .em{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:1.5em;height:1.5em;border-radius:50%;background:color-mix(in srgb,var(--pgi) 60%,var(--pgb));color:var(--pgb);font-size:.55em;font-weight:600;cursor:pointer}
-.em.nt{outline:2px solid var(--gold)}
+.em.nt{outline:0;color:var(--gold)}
 .pgn{text-align:center;font-family:'KFGQPC Text','Geeza Pro','Noto Naskh Arabic','Traditional Arabic',serif;font-size:5cqw;padding-top:1.4cqw}
 .cq{max-width:none;margin:0 -16px}
 .sheet{background:var(--paper);color:var(--mink);border:0;padding:3cqw 13cqw 3cqw}
