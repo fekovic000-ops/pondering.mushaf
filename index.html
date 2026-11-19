@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <title>Pondering Mushaf</title>
-<style>@font-face{font-family:'KFGQPC Hafs';src:url(hafs.woff2) format('woff2');font-display:block}</style><style>@font-face{font-family:'KFGQPC Text';src:url(hafs.woff2) format('woff2');unicode-range:U+0020-007F,U+00A0,U+0600-060B,U+060D-061A,U+061C-061E,U+0620-0669,U+066A-06EF,U+06FA-06FF,U+2000-206F,U+FDF0-FDFF;font-display:block}</style>
+<style>@font-face{font-family:'KFGQPC Hafs';src:url(hafs.woff2) format('woff2');font-display:block}</style><style>@font-face{font-family:'KFGQPC Text';src:url(hafs.woff2) format('woff2');unicode-range:U+0020-007F,U+00A0,U+0600-065F,U+066A-06EF,U+06FA-06FF,U+2000-206F,U+FDF0-FDFF;font-display:block}</style>
 <style>
 :root{--pgi:#000;--pgb:#fff;--pgd:#cfcfcf;--pgl:#777;--teal:#117a70;--pill:#f2e6c9;--paper:#faf6ee;--mink:#262522;--frame:#b58b2a;--lh:2.2;--bg:#eef2f1;--panel:#fff;--ink:#12343b;--mute:#5c767b;--line:#cfdcdb;--gold:#b8892b;--accent:#12343b;--onaccent:#fff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -31,7 +31,7 @@ main{max-width:640px;margin:0 auto;padding:16px 16px 48px}
 .v{cursor:pointer;border-radius:6px;padding:0 2px}
 .v:active,.v.sel{background:color-mix(in srgb,var(--gold) 25%,transparent)}
 .v.has{text-decoration:underline dotted var(--gold);text-decoration-thickness:2px;text-underline-offset:10px}
-.end{color:var(--gold);font-size:.8em;font-family:'KFGQPC Hafs',serif;unicode-bidi:isolate}
+.end{color:var(--gold);font-size:.8em}
 .hint,.mute{color:var(--mute);font-size:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 12px}
 .card .ar{font-size:24px;line-height:2;margin:0 0 8px}
@@ -132,11 +132,12 @@ body.rd .bar{position:static;flex:none;padding:8px 14px}
 .pvdoc h1{font-size:26px;margin:0;color:#117a70}.pvdoc h2{font-size:20px;color:#117a70;border-bottom:2px solid #b58b2a;padding-bottom:4px;margin:26px 0 8px}.pvdoc h2.sm{font-size:16px;border:0;margin:12px 0 4px}.pvdoc h3{font-size:16px;margin:16px 0 4px;break-after:avoid}
 .pvdoc p{margin:0 0 8px;font-size:17px}.pvdoc p.s{color:#666;font-size:14px}.pvdoc p.v{font-family:'KFGQPC Hafs','Traditional Arabic',serif;font-size:24px;line-height:2.1}.pvdoc small{color:#666;font-size:12px;font-family:sans-serif}
 .pvdoc blockquote{margin:6px 14px;padding:4px 10px;border-inline-start:3px solid #b58b2a;font-family:'KFGQPC Hafs','Traditional Arabic',serif;font-size:21px;line-height:2;break-inside:avoid}
+.pvbar .btn{background:#117a70;color:#fff;border:0}.pvbar .btn.alt{background:#fff;color:#111;border:1px solid #888}
 @media print{.pvbar{display:none!important}body.pr{background:#fff}.pvdoc{padding:0;max-width:none}}
 .exl{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--line)}.exl input{width:22px;height:22px;margin-top:3px;flex:none}.exd{display:flex;justify-content:space-between;align-items:center;margin:14px 0 2px}
 nav{justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;overflow:visible}
 nav button{flex:none;padding:10px 14px;font-size:15px;white-space:nowrap}
-#tm{position:relative}#tb,#tmb{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+#tm{position:relative}.nr{display:flex;gap:8px;align-items:center}html[dir=rtl] #tml{left:auto;right:0}.cb{direction:ltr}#lb,#tb,#tmb{border:1px solid var(--line);background:var(--panel);color:var(--ink)}
 #tml{position:absolute;left:0;top:calc(100% + 6px);min-width:190px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.22);z-index:60}
 #tml[hidden]{display:none}#tml button{display:block;width:100%;text-align:start;padding:12px 14px}
 body.rd nav{position:relative;z-index:50}
@@ -148,7 +149,7 @@ body.rd nav{position:relative;z-index:50}
 </style>
 </head>
 <body>
-<nav role="tablist"><div id="tm"><button id="tmb" aria-haspopup="true" aria-expanded="false">Read ▾</button><div id="tml" hidden><button data-t="read">Read</button><button data-t="search">Search</button><button data-t="names">Names</button><button data-t="keys">Keys</button><button data-t="review">Review</button><button data-t="import">Backup</button></div></div><button id="tb">Auto</button></nav>
+<nav role="tablist"><div id="tm"><button id="tmb" aria-haspopup="true" aria-expanded="false">Read ▾</button><div id="tml" hidden><button data-t="read">Read</button><button data-t="search">Search</button><button data-t="names">99 Names of Allah</button><button data-t="keys">Keys of Pondering</button><button data-t="review">Pondering</button><button data-t="import">Export</button></div></div><div class="nr"><button id="lb">عربي</button><button id="tb">Auto</button></div></nav>
 <main id="app"></main>
 <div id="ov"></div><div id="sheet"><div id="sc"></div></div>
 
@@ -677,7 +678,9 @@ function keysTab(){var m=h('div');
 
 function arN(n){return n===0?'لا ملاحظات':n===1?'ملاحظة واحدة':n===2?'ملاحظتان':n<=10?num(n)+' ملاحظات':num(n)+' ملاحظة'}
 function openPageNotes(keys){var sc=document.getElementById('sc');sc.textContent='';sc.appendChild(h('h2',{text:'Notes on page '+PG}));var any=false;
- keys.forEach(function(k){var arr=notesFor(k);if(!arr.length)return;any=true;sc.appendChild(h('div',{class:'card'},h('p',{class:'ar',style:'font-size:22px;line-height:2;margin:0',text:vtext(k)||k}),h('div',{class:'mute',text:'Verse '+k}),noteList(arr,true),h('button',{class:'btn alt',text:'Open verse',onclick:function(){openSheet(k)}})))});
+ var done={};keys.forEach(function(k){var arr=notesFor(k),gs=[],ss=[];arr.forEach(function(n){if(n.g&&n.g.length>1){if(!done[n.id]){done[n.id]=1;gs.push(n)}}else ss.push(n)});
+  gs.forEach(function(n){any=true;sc.appendChild(h('div',{class:'card'},noteList([n],true),h('button',{class:'btn alt',text:'Open verses',onclick:function(){openSheet(n.k)}})))});
+  if(ss.length){any=true;sc.appendChild(h('div',{class:'card'},h('p',{class:'ar',style:'font-size:22px;line-height:2;margin:0',text:vtext(k)||k}),h('div',{class:'mute',text:'Verse '+k}),noteList(ss,true),h('button',{class:'btn alt',text:'Open verse',onclick:function(){openSheet(k)}})))}});
  if(!any)sc.appendChild(h('p',{class:'mute',text:'No notes on this page yet. Tap any verse to write one.'}));
  sc.appendChild(h('div',{class:'row'},h('button',{class:'btn alt',text:'Close',onclick:closeSheet})));
  document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block'}
@@ -696,7 +699,7 @@ function pageView2(){var m=h('div',{class:'rp'}),lines=L.pages[PG],nk={},first=n
  var cq=h('div',{class:'cq'},h('div',{class:'sheet'},h('div',{class:'pgh'},h('span',{text:nm}),h('span',{text:'الجزء '+num(juz)})),t,h('div',{class:'pgn',text:num(PG)})));
  var sx=0,sy=0;cq.ontouchstart=function(e){var c=e.changedTouches[0];sx=c.clientX;sy=c.clientY};cq.ontouchend=function(e){var c=e.changedTouches[0],dx=c.clientX-sx,dy=c.clientY-sy;if(Math.abs(dx)>70&&Math.abs(dy)<50)go(dx<0?PG+1:PG-1)};
  m.appendChild(h('div',{class:'stage'},cq));
- var cnt=0;keys.forEach(function(k){cnt+=notesFor(k).length});
+ var cnt=0,cd={};keys.forEach(function(k){notesFor(k).forEach(function(n){if(!cd[n.id]){cd[n.id]=1;cnt++}})});
  var pa={class:'cb',text:'›','aria-label':'Previous page',onclick:function(){go(PG-1)}},na={class:'cb',text:'‹','aria-label':'Next page',onclick:function(){go(PG+1)}};if(PG<=1)pa.disabled='disabled';if(PG>=604)na.disabled='disabled';
  m.appendChild(S.gm?gbar():h('div',{class:'bar'},h('button',pa),h('button',{class:'pb',onclick:function(){openPageNotes(keys)}},h('span',{text:'ملاحظات هذه الصفحة'}),h('small',{text:arN(cnt)})),h('button',na)));
  return m}
@@ -751,7 +754,10 @@ function review(){var m=h("div");
  return m}
 
 function imp(){var m=h('div'),ta=h('textarea',{'data-raw':'1',placeholder:'Backup text appears here, or paste a backup to restore it'}),msg=h('p',{class:'mute'});
- m.appendChild(h('h2',{text:'Back up your notes'}));
+ m.appendChild(h('h2',{text:'Export'}));
+ m.appendChild(h('p',{class:'mute',text:'Choose which notes or which session verses to export, as Word or PDF.'}));
+ m.appendChild(h('div',{class:'row',style:'margin:0 0 18px'},h('button',{class:'btn',text:'Export notes…',onclick:function(){openExport('notes')}}),h('button',{class:'btn alt',text:'Export session…',onclick:function(){openExport('ses')}})));
+ m.appendChild(h('h2',{text:'Backup and restore'}));
  m.appendChild(h('p',{class:'mute',text:'Your notes are saved only in this browser, on this device. Create a backup now and then and keep the text somewhere safe. Paste it here to restore.'}));
  m.appendChild(ta);
  m.appendChild(h('div',{class:'row'},h('button',{class:'btn',text:'Create backup',onclick:function(){ta.value=JSON.stringify(S.n);try{ta.select();document.execCommand('copy');msg.textContent='Backup created and copied. '+S.n.length+' notes.'}catch(e){msg.textContent='Backup created. Copy the text above.'}}}),
@@ -1032,6 +1038,129 @@ function drawExport(){S.open=null;S.gopen=false;var sc=document.getElementById('
    day.forEach(function(n){var t=n.text.replace(/⟦(\d+:\d+)⟧/g,'[$1]');sc.appendChild(item(n.id,glabel(n.g||[n.k]),t.length>90?t.slice(0,90)+'…':t))})})}
  else S.ses.forEach(function(k){var t=vtext(k);sc.appendChild(item(k,vlabel(k),t.length>70?t.slice(0,70)+'…':t))})}
 
+/* ===== English / Arabic interface ===== */
+var LANG=(function(){try{return localStorage.getItem('qlang')==='ar'?'ar':'en'}catch(e){return 'en'}})();
+(function(){
+var D={
+'Read':'قراءة','Search':'بحث','99 Names of Allah':'أسماء الله الحسنى','Keys of Pondering':'مفاتيح التدبر','Pondering':'التدبّر','Export':'التصدير',
+'Auto':'تلقائي','Dark':'داكن','Light':'فاتح','Close':'إغلاق','Delete':'حذف','Edit':'تعديل','Cancel':'إلغاء','Save note':'حفظ الملاحظة','Save changes':'حفظ التعديلات',
+'Restore':'استعادة','Clear':'مسح','Go':'اذهب','Select all':'تحديد الكل','Select day':'تحديد اليوم','Unselect day':'إلغاء تحديد اليوم','Show more':'عرض المزيد',
+'Next':'التالي','Prev':'السابق','Next page':'الصفحة التالية','Previous page':'الصفحة السابقة','Page':'صفحة','Results':'النتائج','Notes':'الملاحظات',
+'New note':'ملاحظة جديدة','New group note':'ملاحظة جماعية جديدة','Write note':'اكتب ملاحظة','What are you pondering?':'بماذا تتدبر؟',
+'Add to session':'أضف إلى الجلسة','In session ✓':'ضمن الجلسة ✓','Group in session ✓':'المجموعة ضمن الجلسة ✓','Open in Mushaf':'افتح في المصحف',
+'Open verse':'افتح الآية','Open verses':'افتح الآيات','Open verse and history':'افتح الآية وسجلها','Exact word':'الكلمة بعينها','Contains':'تحتوي',
+'Quran':'القرآن','Hadith':'الحديث','Verses with the name':'الآيات التي فيها الاسم','Related forms':'صيغ قريبة','More verses from the book':'آيات أخرى من الكتاب',
+'Direct mention':'ذكر مباشر','Indirect mention':'ذكر غير مباشر','Original pages':'الصفحات الأصلية','Madinah page layout':'صفحات مصحف المدينة',
+'The 99 names':'أسماء الله الحسنى','‹ All names':'‹ كل الأسماء','‹ All keys':'‹ كل المفاتيح','‹ Key ':'‹ المفتاح ','Back to all sittings':'العودة إلى كل الجلسات',
+'Your pondering sittings':'جلسات تدبّرك','You have no notes yet.':'لا توجد لديك ملاحظات بعد.','Your session is empty.':'جلستك فارغة.',
+'Include my notes on these verses':'أضف ملاحظاتي على هذه الآيات','Select & export notes…':'اختر ملاحظات للتصدير…','Export notes…':'تصدير الملاحظات…','Export session…':'تصدير الجلسة…',
+'Export notes':'تصدير الملاحظات','Export session':'تصدير الجلسة','Word (.docx)':'ملف وورد (.docx)','PDF':'ملف PDF','Print / Save as PDF':'طباعة / حفظ بصيغة PDF',
+'Choose which notes or which session verses to export, as Word or PDF.':'اختر الملاحظات أو آيات الجلسة التي تريد تصديرها بصيغة وورد أو PDF.',
+'Backup and restore':'النسخ الاحتياطي والاستعادة','Create backup':'إنشاء نسخة احتياطية','That is not a valid backup.':'هذه ليست نسخة احتياطية صالحة.',
+'Backup created. Copy the text above.':'تم إنشاء النسخة. انسخ النص أعلاه.',
+'Backup text appears here, or paste a backup to restore it':'يظهر نص النسخة الاحتياطية هنا، أو الصق نسخة لاستعادتها',
+'Your notes are saved only in this browser, on this device. Create a backup now and then and keep the text somewhere safe. Paste it here to restore.':'ملاحظاتك محفوظة في هذا المتصفح وعلى هذا الجهاز فقط. أنشئ نسخة احتياطية من وقت لآخر واحتفظ بنصها في مكان آمن. الصقها هنا لاستعادتها.',
+'Write a comparison note about these verses':'اكتب ملاحظة مقارنة عن هذه الآيات','Comparison note':'ملاحظة مقارنة','Previous notes':'ملاحظات سابقة','Previous notes on this group':'ملاحظات سابقة على هذه المجموعة',
+'Mentioned in notes on other verses':'مذكورة في ملاحظات على آيات أخرى','Go to page or surah':'اذهب إلى صفحة أو سورة','Choose a surah':'اختر سورة','Verses mentioned: ':'آيات مذكورة: ',
+'Or pick from your session:':'أو اختر من جلستك:','＋ Insert a verse':'＋ أدرج آية','− verse':'− آية','Reading…':'جارٍ القراءة…','Pondering notes':'ملاحظات التدبّر','Pondering session':'جلسة التدبّر',
+'No ahadith are listed for this name in the book.':'لا توجد أحاديث مذكورة لهذا الاسم في الكتاب.','No source given in the book':'لم يُذكر مصدر في الكتاب',
+'Ahadith from the book, without the explanations. The text was typed from the scanned pages, so please check the wording against the book. Direct: the name itself is in the hadith. Indirect: the book places it under this name, but the name is not written in the text.':'أحاديث الكتاب دون شروحه. نُقل النص من الصفحات الممسوحة ضوئياً، فيُرجى مراجعة الألفاظ على الكتاب. المباشر: الاسم نفسه مذكور في الحديث. غير المباشر: وضعه الكتاب تحت هذا الاسم لكن لفظ الاسم غير مكتوب في النص.',
+'Verses where the name appears in another form, such as a verb or a phrase. These are suggestions, so please check them.':'آيات ورد فيها الاسم بصيغة أخرى، كفعل أو عبارة. هذه اقتراحات، فيُرجى مراجعتها.',
+'Verses the book cites under this name that are not listed above.':'آيات يذكرها الكتاب تحت هذا الاسم ولم ترد أعلاه.',
+'The name appears in a very large number of verses. It is added as the 99th, the first name in the traditional list.':'يرد الاسم في عدد كبير جداً من الآيات. أُضيف اسماً تاسعاً وتسعين، وهو أول الأسماء في القائمة التقليدية.',
+'Also describes the Prophet in 9:128.':'يوصف به النبي ﷺ أيضاً في 9:128.',
+'Also describes people in a few verses.':'يوصف به الناس أيضاً في آيات قليلة.',
+'Also describes people in 76:2.':'يوصف به الناس أيضاً في 76:2.',
+'Also describes people ("the seeing") in a few verses.':'يوصف به الناس أيضاً («البصير») في آيات قليلة.',
+'Also describes the Quran (50:1, 85:21).':'يوصف به القرآن أيضاً (50:1، 85:21).',
+'Also describes the Quran (for example 10:1, 36:2).':'يوصف به القرآن أيضاً (مثل 10:1، 36:2).',
+'Also used for witnesses among people.':'يُستعمل أيضاً للشهود من الناس.',
+'Also used for people in a few verses (for example 12:76, 15:53).':'يُستعمل أيضاً للناس في آيات قليلة (مثل 12:76، 15:53).',
+'Also used for human kings (for example in the story of Yusuf), so only verses that clearly refer to Allah are listed.':'يُستعمل أيضاً لملوك من البشر (كما في قصة يوسف)، لذلك لم تُدرج إلا الآيات التي يظهر فيها أن المراد الله.',
+'Also means "peace" or "submission" in a few verses, so read each one.':'يأتي أيضاً بمعنى «السلام» أو «الاستسلام» في آيات قليلة، فاقرأ كل آية على حدة.',
+'5:48 uses the word for the Quran.':'في 5:48 جاء اللفظ وصفاً للقرآن.',
+'Only 57:3 names Allah as al-Awwal.':'لم يُسمَّ الله «الأول» إلا في 57:3.',
+'Only verses that name Allah as al-Hayy are listed.':'لم تُدرج إلا الآيات التي سمّت الله «الحي».',
+'Only verses where the word clearly describes Allah are listed.':'لم تُدرج إلا الآيات التي يظهر فيها أن اللفظ وصف لله.',
+'Only verses where the word clearly describes Allah are listed. It also describes many other things.':'لم تُدرج إلا الآيات التي يظهر فيها أن اللفظ وصف لله، وهو يصف أشياء أخرى كثيرة.',
+'Only verses that clearly name Allah as al-Haqq are listed. The word also means "the truth" in over 200 other verses.':'لم تُدرج إلا الآيات التي تسمّي الله «الحق». ويأتي اللفظ بمعنى «الحقيقة» في أكثر من 200 آية أخرى.',
+'Only 6:114 uses the word for Allah. Related: "the best of judges" and "judgment belongs to Allah". 4:35 means human arbiters and is not listed.':'6:114 وحدها تستعمل اللفظ لله. وقريب منه: «أحكم الحاكمين» و«إن الحكم إلا لله». أما 4:35 فتعني حكَماً من البشر ولم تُدرج.',
+'Not stated as a name in the Quran. Verses that speak of Allah commanding or upholding justice are shown.':'لم يرد اسماً في القرآن. عُرضت الآيات التي تذكر أمر الله بالعدل وقيامه به.',
+'Not stated as a noun in the Quran. 56:3 describes the Hour.':'لم يرد اسماً في القرآن. وفي 56:3 وصف للساعة.',
+'Not stated as a noun in the Quran. Related verb in 3:26.':'لم يرد اسماً في القرآن. ورد فعل قريب في 3:26.',
+'Not stated as a noun in the Quran. Related verb shown (2:245).':'لم يرد اسماً في القرآن. عُرض فعل قريب (2:245).',
+'Not stated as a noun in the Quran. Related verb shown.':'لم يرد اسماً في القرآن. عُرض فعل قريب.',
+'Not stated as a noun in the Quran. Related verbs shown (for example 3:55, 58:11).':'لم يرد اسماً في القرآن. عُرضت أفعال قريبة (مثل 3:55، 58:11).',
+'Not stated as a noun in the Quran. Related verbs shown.':'لم يرد اسماً في القرآن. عُرضت أفعال قريبة.',
+'Not stated as a noun in the Quran. Related verses shown.':'لم يرد اسماً في القرآن. عُرضت آيات قريبة.',
+'Not stated as a noun in the Quran. Related verses shown. 28:5 is about believers.':'لم يرد اسماً في القرآن. عُرضت آيات قريبة. و28:5 عن المؤمنين.',
+'Not stated as a word about Allah in the Quran.':'لم يرد لفظاً عن الله في القرآن.','Not stated as a word in the Quran.':'لم يرد لفظاً في القرآن.',
+'Not stated as a word in the Quran. Verses where Allah decides benefit are shown.':'لم يرد لفظاً في القرآن. عُرضت الآيات التي يقدّر الله فيها النفع.',
+'Not stated as a word in the Quran. Verses where Allah decides harm are shown.':'لم يرد لفظاً في القرآن. عُرضت الآيات التي يقدّر الله فيها الضر.',
+'Related plural forms where Allah speaks of Himself.':'صيغ جمع قريبة يتحدث فيها الله عن نفسه.','Related: "exalted is He" verses.':'قريب منه: آيات «تعالى».',
+'Related: "the Owner of retribution".':'قريب منه: «ذو انتقام».','Related: "the Responders" (37:75) and "I respond" (2:186).':'قريب منه: «المجيبون» (37:75) و«أجيب» (2:186).',
+'Related: "the best of creators" (23:14, 37:125).':'قريب منه: «أحسن الخالقين» (23:14، 37:125).','Related: "the best of openers" (7:89).':'قريب منه: «خير الفاتحين» (7:89).',
+'Related: "the best of providers".':'قريب منه: «خير الرازقين».','Related: "the just ones" whom Allah loves (5:42, 49:9, 60:8).':'قريب منه: «المقسطين» الذين يحبهم الله (5:42، 49:9، 60:8).',
+'Related: "your Maker" (2:54).':'قريب منه: «بارئكم» (2:54).','Related: 13:11.':'قريب منه: 13:11.','Related: Allah as protector of the believers, and "no protector besides Allah".':'قريب منه: الله ولي المؤمنين، و«ما لهم من دونه من وليّ».',
+'Related: verbs meaning "He gives life".':'قريب منه: أفعال بمعنى «يحيي».','Related: verbs meaning "He shaped you".':'قريب منه: أفعال بمعنى «صوّركم».',
+'Also used for the Aziz of Egypt (12:30, 12:51, 12:78, 12:88) and the Prophet (9:128).':'يُستعمل أيضاً لعزيز مصر (12:30، 12:51، 12:78، 12:88) وللنبي ﷺ (9:128).',
+'Also used for Ibrahim (9:114, 11:75) and Ismail (37:101).':'يُستعمل أيضاً لإبراهيم (9:114، 11:75) وإسماعيل (37:101).',
+'Also used for Yusuf (12:55) and for the Prophet ("not a guardian over you").':'يُستعمل أيضاً ليوسف (12:55) وللنبي ﷺ («لست عليهم بوكيل»).',
+'Also in sentences like "I am not a guardian over you" (for example 6:66, 6:107).':'يرد أيضاً في عبارات مثل «وما أنا عليكم بوكيل» (مثل 6:66، 6:107).',
+'Also in "he has no guide" and for the Prophet (30:53).':'يرد أيضاً في «ما له من هاد» وللنبي ﷺ (30:53).',
+'Also describes people (17:3, 34:13) and appears as "thanks" in 76:9.':'يوصف به الناس أيضاً (17:3، 34:13) ويأتي بمعنى «الشكر» في 76:9.',
+'17:14 is about a person as his own reckoner.':'17:14 عن الإنسان حسيباً على نفسه.','24:62 means "a matter that gathers people".':'24:62 تعني «أمراً جامعاً».',
+'25:59 means "ask someone who knows".':'25:59 تعني «فاسأل به خبيراً».','50:18 describes an angel, 11:93 a person.':'50:18 تصف ملكاً، و11:93 تصف إنساناً.','55:27 and 55:78.':'55:27 و55:78.',
+'Page layout is loaded. Open Read.':'تم تحميل تخطيط الصفحات. افتح «قراءة».'
+};
+var AD='٠١٢٣٤٥٦٧٨٩';function nd(s){return s.replace(/\d/g,function(d){return AD[d]})}
+var P=[
+[/^◐ (Auto|Light|Dark)$/,function(m){return '◐ '+D[m[1]]}],
+[/^(.*) ▾$/,function(m){var t=tr(m[1]);return t===m[1]?m[0]:t+' ▾'}],
+[/^Hadith \((\d+)\)$/,function(m){return 'الأحاديث ('+m[1]+')'}],
+[/^(Verses with the name|Related forms|More verses from the book) \((\d+) verses?\)$/,function(m){return tr(m[1])+' ('+m[2]+' آية)'}],
+[/^(Direct mention|Indirect mention) \((\d+)\)$/,function(m){return tr(m[1])+' ('+m[2]+')'}],
+[/^Book vol\. (\S+), p\. (\S+)$/,function(m){return 'الكتاب، المجلد '+m[1]+'، ص '+m[2]}],
+[/^Verse (\S+)$/,function(m){return 'الآية '+m[1]}],[/^Page (\d+)$/,function(m){return 'الصفحة '+m[1]}],[/^Key (\d+)$/,function(m){return 'المفتاح '+m[1]}],
+[/^Notes on page (\d+)$/,function(m){return 'ملاحظات الصفحة '+m[1]}],
+[/^Session \((\d+)\)$/,function(m){return 'الجلسة ('+m[1]+')'}],[/^Group of (\d+)$/,function(m){return 'مجموعة من '+m[1]}],
+[/^Group note · (.*)$/,function(m){return 'ملاحظة جماعية · '+m[1]}],[/^Group · (.*)$/,function(m){return 'مجموعة · '+m[1]}],
+[/^Save on all (\d+) verses$/,function(m){return 'احفظ على الآيات الـ'+m[1]}],
+[/^Restored (\d+) new notes\.$/,function(m){return 'تمت استعادة '+m[1]+' ملاحظة جديدة.'}],
+[/^Backup created and copied\. (\d+) notes\.$/,function(m){return 'تم إنشاء النسخة ونسخها. عدد الملاحظات: '+m[1]+'.'}],
+[/^(\d+) selected( · .*)?$/,function(m){return m[1]+' محدد'+(m[2]||'')}],
+[/^(\d+) notes?$/,function(m){return m[1]+' ملاحظة'}],
+[/^(\d+) verses?$/,function(m){return m[1]+' آية'}],
+[/^(.*) · on (.*)$/,function(m){return m[1]+' · على '+m[2]}],
+[/^(.*) · edited$/,function(m){return m[1]+' · معدّلة'}],
+[/^(.*) · today’s sitting: (.*)$/,function(m){return m[1]+' · جلسة اليوم: '+m[2]}]
+];
+function tr(s){var t=s.trim();if(!t)return s;var o=D[t];if(o===undefined)for(var i=0;i<P.length;i++){var m=t.match(P[i][0]);if(m){o=P[i][1](m);break}}
+ if(o===undefined)return s;var lead=s.match(/^\s*/)[0],trail=s.match(/\s*$/)[0];return lead+nd(o)+trail}
+window.tr=tr;
+var skip={TEXTAREA:1,SCRIPT:1,STYLE:1,INPUT:1};
+function skipEl(e){for(;e&&e.nodeType===1;e=e.parentNode){if(skip[e.tagName]||(e.classList&&e.classList.contains('ar')&&!e.classList.contains('mute')))return true}return false}
+function doText(n){if(n.__t!==undefined&&n.nodeValue===n.__t)return;n.__o=n.nodeValue;if(skipEl(n.parentNode)){n.__t=n.nodeValue;return}
+ var t=LANG==='ar'?tr(n.__o):n.__o;n.__t=t;if(t!==n.nodeValue)n.nodeValue=t}
+var AT=['placeholder','aria-label','title'];
+function doEl(e){AT.forEach(function(a){if(!e.hasAttribute||!e.hasAttribute(a))return;var k='__o_'+a,v=e.getAttribute(a);if(e[k]!==undefined&&e[k+'t']===v)return;e[k]=v;var t=LANG==='ar'?tr(v):v;e[k+'t']=t;if(t!==v)e.setAttribute(a,t)})}
+function walk(n){if(n.nodeType===3){doText(n);return}if(n.nodeType!==1)return;doEl(n);if(skip[n.tagName])return;for(var c=n.firstChild;c;c=c.nextSibling)walk(c)}
+var obs=new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='characterData')doText(m.target);else if(m.type==='attributes')doEl(m.target);else m.addedNodes.forEach(walk)})});
+function apply(){document.documentElement.lang=LANG;document.documentElement.dir=LANG==='ar'?'rtl':'ltr';document.body.classList.toggle('ui-ar',LANG==='ar');
+ document.title=LANG==='ar'?'مصحف التدبّر':'Pondering Mushaf';
+ var lb=document.getElementById('lb');if(lb)lb.textContent=LANG==='ar'?'English':'عربي';
+ // reset stored originals so everything re-translates
+ var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n;while(n=w.nextNode()){if(n.__o!==undefined){n.__t=undefined;n.nodeValue=n.__o}}
+ document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(function(e){AT.forEach(function(a){if(e['__o_'+a]!==undefined){e.setAttribute(a,e['__o_'+a]);e['__o_'+a+'t']=undefined}})});
+ walk(document.body)}
+var _ls=Date.prototype.toLocaleTimeString,_ld=Date.prototype.toLocaleDateString;
+Date.prototype.toLocaleTimeString=function(l,o){return _ls.call(this,(l===undefined||(Array.isArray(l)&&!l.length))&&LANG==='ar'?'ar-EG':l,o)};
+Date.prototype.toLocaleDateString=function(l,o){return _ld.call(this,(l===undefined||(Array.isArray(l)&&!l.length))&&LANG==='ar'?'ar-EG':l,o)};
+function init(){obs.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:AT});
+ var lb=document.getElementById('lb');if(lb)lb.onclick=function(){LANG=LANG==='ar'?'en':'ar';try{localStorage.setItem('qlang',LANG)}catch(e){}apply();try{render(true)}catch(e){}};apply()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+
 document.getElementById("ov").onclick=closeSheet;
 var TH=ld("qt","auto");
 function applyTheme(){var r=document.documentElement;if(TH==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",TH);document.getElementById("tb").textContent="◐ "+(TH==="auto"?"Auto":TH==="light"?"Light":"Dark")}
@@ -1047,7 +1176,8 @@ document.querySelectorAll("nav button[data-t]").forEach(function(b){b.onclick=fu
 render();
 function dataReady(){try{loadData();render()}catch(e){document.getElementById('app').textContent='Error: '+(e&&e.message)}}
 window.addEventListener('error',function(e){if(!L){var a=document.getElementById('app');if(a)a.textContent='Error: '+e.message}});
-setTimeout(function(){var d=document.createElement('script');d.src='data.js';d.onload=dataReady;d.onerror=function(){document.getElementById('app').textContent='Could not load the Quran data. Check your connection and reload.'};document.head.appendChild(d)},0);
+function getData(n){var d=document.createElement('script');d.src='data.js'+(n?'?r='+Date.now():'');d.onload=function(){if(window.QD)dataReady();else if(n<2)getData(n+1);else document.getElementById('app').textContent='The Quran data file (data.js) is missing or is an old version. Upload data.js from the latest zip, then reload.'};d.onerror=function(){document.getElementById('app').textContent='Could not load the Quran data. Check your connection and reload.'};document.head.appendChild(d)}
+setTimeout(function(){getData(0)},0);
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
 </body>
