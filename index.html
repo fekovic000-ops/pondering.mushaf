@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#eef2f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000613" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover,maximum-scale=1,user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Mushaf">
@@ -19,7 +22,7 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="dark"]{--pgi:#cfc9b8;--pgb:#000;--pgd:#3a3a3a;--pgl:#8a8a8a;--teal:#5fc4b8;--pill:#2b3a32;--paper:#000613;--mink:#c4bda8;--frame:#b08d45;--lh:2.4;--bg:#000613;--panel:#0b1626;--ink:#e6eeec;--mute:#93aaad;--line:#27403f;--gold:#e0b45a;--accent:#e0b45a;--onaccent:#000613;color-scheme:dark}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,sans-serif}
+html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:4px;padding:8px 12px;background:var(--bg);border-bottom:1px solid var(--line)}
 nav button{flex:1;padding:10px 4px;border:0;border-radius:10px;background:none;color:var(--mute);font:600 15px inherit;font-family:inherit}
@@ -130,6 +133,7 @@ body.rd .bar{position:static;flex:none;padding:8px 14px}
 .bmh{background:color-mix(in srgb,var(--gold) 45%,transparent)!important;border-radius:8px;box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 45%,transparent);animation:bmp 1.4s ease-in-out 3}@keyframes bmp{50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--gold) 15%,transparent)}}
 .wtp{cursor:pointer;border-radius:6px;padding:0 2px}.wtp:active{background:color-mix(in srgb,var(--gold) 35%,transparent)}.wmo{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px}.wmc{max-width:420px;width:100%;max-height:70vh;overflow:auto;margin:0}.wmw{font-size:34px;text-align:center;line-height:1.8}.wmm{font-size:22px;line-height:2;margin:6px 0}
 .scbk{text-align:center;margin:26px 0 34px;color:var(--gold);display:flex;align-items:center;gap:12px}.scbk:before,.scbk:after{content:'';flex:1;height:1px;background:var(--gold);opacity:.55}.scbk span{font-size:22px;line-height:1}#sbar{position:fixed;right:2px;top:86px;bottom:86px;width:3px;border-radius:3px;background:rgba(128,128,128,.18);z-index:5;pointer-events:none}#sbar i{display:block;width:100%;background:var(--gold);opacity:.55;border-radius:3px;transition:height .25s}
+.cq,.cq *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .kth{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}.kt{flex:none;width:120px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);padding:4px;font-size:12px}.kt img{width:100%;display:block;border-radius:6px}
 #kov{position:fixed;inset:0;background:#fff;z-index:50;overflow:auto;display:none}#kov img{width:100%;display:block}.kcap{position:sticky;top:0;background:rgba(0,0,0,.75);color:#fff;text-align:center;padding:8px;font-size:14px}
 #pv{display:none}body.pr>*:not(#pv){display:none!important}body.pr #pv{display:block;position:static;background:#fff;color:#000;min-height:100vh}
@@ -822,7 +826,6 @@ function pageView2(){var m=h('div',{class:'rp'}),lines=L.pages[PG],nk={},first=n
   else for(var id=l.f;id<=l.l;id++){var w=W[id];if(!w)continue;var k=w[0]+':'+w[1];d.appendChild(h('span',{class:(NUM.test(w[2])?'em':'w')+(nk[k]?' nt':'')+(S.sel===k?' sel':'')+(inGrp(k)?' gs':''),'data-k':k,text:w[2],onclick:tap(k)}))}
   t.appendChild(d)});
  var cq=h('div',{class:'cq'},h('div',{class:'sheet'},h('div',{class:'pgh'},h('span',{text:nm}),h('span',{text:'الجزء '+num(juz)})),t,h('div',{class:'pgn',text:num(PG)})));
- var sx=0,sy=0;cq.ontouchstart=function(e){var c=e.changedTouches[0];sx=c.clientX;sy=c.clientY};cq.ontouchend=function(e){var c=e.changedTouches[0],dx=c.clientX-sx,dy=c.clientY-sy;if(Math.abs(dx)>70&&Math.abs(dy)<50)go(dx>0?PG+1:PG-1)};
  m.appendChild(h('div',{class:'stage'},cq));
  var cnt=0,cd={};keys.forEach(function(k){notesFor(k).forEach(function(n){if(!cd[n.id]){cd[n.id]=1;cnt++}})});
  var pa={class:'cb',text:'›','aria-label':'Previous page',onclick:function(){go(PG-1)}},na={class:'cb',text:'‹','aria-label':'Next page',onclick:function(){go(PG+1)}};if(PG<=1)pa.disabled='disabled';if(PG>=604)na.disabled='disabled';
@@ -1013,7 +1016,7 @@ function openGroup(keep){var g=gkeys();if(!g.length)return;S.open=null;S.gopen=t
  document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block'}
 function toggleGM(){S.gm=!S.gm;S.gn=0;S.sel=null;closeSheet();render(true)}
 function tapG(k){var i=gidx()[k];if(i==null)return;if(!S.gn){S.ga=i;S.gs=i;S.gn=1}else{S.gs=Math.min(S.ga,i);S.gn=Math.abs(i-S.ga)+1}render(true)}
-function tap(k){return function(){if(S.gm){tapG(k);return}S.sel=k;document.querySelectorAll('.sheet [data-k]').forEach(function(e){e.classList.toggle('sel',e.getAttribute('data-k')===k)});openSheet(k)}}
+function tap(k){return function(){if(Date.now()-(window.__sw||0)<600)return;if(S.gm){tapG(k);return}S.sel=k;document.querySelectorAll('.sheet [data-k]').forEach(function(e){e.classList.toggle('sel',e.getAttribute('data-k')===k)});openSheet(k)}}
 function gbar(){var g=S.gn?gkeys():[],b=h('div',{class:'bar gbar'});
  b.appendChild(h('div',{class:'gi',text:S.gn?S.gn+(S.gn===1?' verse':' verses')+' selected · '+g[0]+(S.gn>1?' – '+g[g.length-1]:''):'Tap the first verse, then tap the last verse of the group'}));
  var r=h('div',{class:'gr'});
@@ -1211,6 +1214,11 @@ function sbarUpd(){var b=document.getElementById('sbar');if(S.tab!=='read'){if(b
  if(!b){b=h('div',{id:'sbar'},h('i'));document.body.appendChild(b)}
  var k=sbarKey();if(!k){b.style.display='none';return}var p=k.split(':'),f=Math.min(1,(+p[1])/ayTot(+p[0]));b.style.display='block';b.firstChild.style.height=(f*100)+'%';b.title=Math.round((1-f)*100)+'% of the surah left'}
 (function(){var _r=render;render=function(){var r=_r.apply(this,arguments);try{sbarUpd()}catch(e){}return r};var t=null;window.addEventListener('scroll',function(){if(t)return;t=setTimeout(function(){t=null;try{sbarUpd()}catch(e){}},120)},{passive:true})})();
+
+(function(){var sx=0,sy=0,st=0,on=false;
+document.addEventListener('touchstart',function(e){on=e.touches.length===1&&S.tab==='read'&&!SCR&&!!e.target.closest&&!!e.target.closest('.cq');if(on){sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now()}},{passive:true,capture:true});
+document.addEventListener('touchend',function(e){if(!on)return;on=false;if(e.touches.length||ZF>1.05)return;var c=e.changedTouches[0],dx=c.clientX-sx,dy=c.clientY-sy;
+ if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.4&&Date.now()-st<1000){window.__sw=Date.now();var sl=window.getSelection&&window.getSelection();if(sl&&sl.removeAllRanges)sl.removeAllRanges();var n=dx>0?PG+1:PG-1;if(n>=1&&n<=604){PG=n;sv('qp',PG);S.sel=null;render();window.scrollTo(0,0)}}},{passive:true,capture:true})})();
 
 /* Tafsir al-Tahrir wa al-Tanwir (Ibn Ashur), vol. 1 - per verse */
 var TF=null,TFP=null,TFK=null;
@@ -1481,7 +1489,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 document.getElementById("ov").onclick=closeSheet;
 var TH=ld("qt","auto");
-function applyTheme(){var r=document.documentElement;if(TH==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",TH);document.getElementById("tb").textContent="◐ "+(TH==="auto"?"Auto":TH==="light"?"Light":"Dark")}
+function applyTheme(){var r=document.documentElement;try{var tc=TH==="dark"||(TH==="auto"&&matchMedia("(prefers-color-scheme:dark)").matches)?"#000613":"#eef2f1";document.querySelectorAll("meta[name=theme-color]").forEach(function(m){m.setAttribute("content",tc);m.removeAttribute("media")})}catch(e){}if(TH==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",TH);document.getElementById("tb").textContent="◐ "+(TH==="auto"?"Auto":TH==="light"?"Light":"Dark")}
 document.getElementById("tb").onclick=function(){TH=TH==="auto"?"light":TH==="light"?"dark":"auto";sv("qt",TH);applyTheme()};
 applyTheme();
 
