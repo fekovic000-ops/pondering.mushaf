@@ -183,7 +183,7 @@ body.rd nav{position:relative;z-index:50}
 .ui-ar h2,.ui-ar h3,.ui-ar .ntt{text-transform:none}h2,h3,.ntt{text-transform:capitalize}
 @media (min-width:700px) and (orientation:landscape){main,body.rd main{max-width:none!important}.scr{max-width:none!important;width:100%!important}.scw{max-width:none!important;width:100%!important;padding:4px 4vw 100px!important;box-sizing:border-box}.scp{font-size:calc(clamp(34px,4.3vw,64px)*var(--zf,1))!important}}
 @media (min-width:700px) and (min-height:700px){.scp{font-size:calc(clamp(34px,4.3vw,60px)*var(--zf,1))}.scw{padding:4px 5vw 100px!important}main{max-width:none}body.rd main{max-width:none}.scw{max-width:none!important}#sheet{width:min(100%,760px)!important;font-size:15.5px!important}#sheet .ar{font-size:26px!important}#sheet .tfx p{font-size:20px!important}.tb .tt b{font-size:20px}}
-#sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}textarea,input[type=text],input[type=search],input:not([type]),select{font-size:16px!important}#ov{touch-action:none}.scr .pgn{font-size:clamp(14px,2.2vw,20px)!important;padding:2px 14px!important;min-width:0!important;margin:10px auto 90px!important}
+#sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.skw{padding:8px 2px}.sk{border-radius:8px;background:linear-gradient(90deg,rgba(128,128,128,.14) 25%,rgba(128,128,128,.28) 37%,rgba(128,128,128,.14) 63%);background-size:400% 100%;animation:skm 1.3s ease infinite}.skl{height:14px;margin:12px 0}.skv{height:64px;margin:6px 0 18px}@keyframes skm{0%{background-position:100% 50%}100%{background-position:0 50%}}@media (prefers-reduced-motion:reduce){.sk{animation:none}}textarea,input[type=text],input[type=search],input:not([type]),select{font-size:16px!important}#ov{touch-action:none}.scr .pgn{font-size:clamp(14px,2.2vw,20px)!important;padding:2px 14px!important;min-width:0!important;margin:10px auto 90px!important}
 
 #sheet>#szw{max-width:none!important}
 </style>
@@ -253,10 +253,10 @@ function jump(k){if(/:0$/.test(k))k=k.split(':')[0]+':1';var p=vpage(k);if(!p)re
 function vlabel(k){var a=k.split(':');if(a[1]==='0')return sname(+a[0])+' · Whole surah';return a[0]+':'+a[1]+' · '+sname(+a[0])}
 function sesView(m){
  if(!S.ses.length){m.appendChild(h('p',{class:'mute',text:'Your pondering session is empty. Search a word, then tap Add to session on the verses you want to compare.'}));return m}
- S.ses.forEach(function(k){var arr=notesFor(k);m.appendChild(h('div',{class:'card'},h('div',{class:'mute',text:vlabel(k)}),h('p',{class:'ar',style:'margin:0 0 6px',text:vtext(k)}),arr.length?noteList(arr.slice(0,2),true):h('p',{class:'mute',text:'No notes yet.'}),h('div',{class:'row'},h('button',{class:'btn alt',text:'Notes',onclick:function(){openSheet(k)}}),h('button',{class:'btn alt',text:'Open in Mushaf',onclick:function(){jump(k)}}),h('button',{class:'btn alt',text:'Remove',onclick:function(){toggleSes(k);render(true)}}))))});
+ S.ses.forEach(function(k){var arr=notesFor(k);m.appendChild(h('div',{class:'card'},h('div',{class:'mute',text:vlabel(k)}),h('p',{class:'ar',style:'margin:0 0 6px',text:vtext(k)}),h('div',{class:'row'},h('button',{class:'btn alt',text:'Notes',onclick:function(){openSheet(k)}}),h('button',{class:'btn alt',text:'Open in Mushaf',onclick:function(){jump(k)}}),h('button',{class:'btn alt',text:'Remove',onclick:function(){toggleSes(k);render(true)}}))))});
  var ta=h('textarea',{placeholder:'Write a comparison note about these verses'}),msg=h('p',{class:'mute'}),sti=h('input',{type:'text',placeholder:'Title (optional)',maxlength:'120',style:'width:100%;padding:10px;margin:0 0 8px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-size:16px;font-family:inherit'});
  m.appendChild(h('h2',{text:'Comparison note',style:'margin-top:18px'}));m.appendChild(sti);m.appendChild(ta);
- m.appendChild(h('div',{class:'row'},h('button',{class:'btn',text:'Save on all '+S.ses.length+' verses',onclick:function(){ta.value=salF(ta.value);var t=ta.value.trim();if(!t)return;var ks=S.ses.slice(),now=Date.now();ks.forEach(function(k,i){var o=ks.filter(function(x){return x!==k});var nn={id:now+'-'+i,k:k,text:t+(o.length?'\n\nCompared with: '+o.join(', '):''),date:today(),ts:now+i};if(sti.value.trim())nn.title=sti.value.trim();S.n.push(nn)});sv('qn',S.n);ta.value='';sti.value='';window.__sesMsg='Saved on '+ks.length+' verses.';render(true)}}),h('button',{class:'btn alt',text:'End session',onclick:function(){S.ses=[];sv('qs',S.ses);endSit();render()}}),h('button',{class:'btn alt',text:'Export…',onclick:function(){openExport('ses')}})));
+ m.appendChild(h('div',{class:'row'},h('button',{class:'btn',text:S.ses.length>1?'Save as one note on '+S.ses.length+' verses':'Save note',onclick:function(){ta.value=salF(ta.value);var t=ta.value.trim();if(!t)return;var ks=S.ses.slice(),now=Date.now();var nn={id:now+'',k:ks[0],text:t,date:today(),ts:now,refs:refsOf(t,ks[0])};if(ks.length>1)nn.g=ks.slice();if(sti.value.trim())nn.title=sti.value.trim();S.n.push(nn);sv('qn',S.n);try{touchSit()}catch(e){}ta.value='';sti.value='';window.__sesMsg=ks.length>1?'Saved as one note on '+ks.length+' verses.':'Saved.';render(true)}}),h('button',{class:'btn alt',text:'End session',onclick:function(){S.ses=[];sv('qs',S.ses);endSit();render()}}),h('button',{class:'btn alt',text:'Export…',onclick:function(){openExport('ses')}})));
  if(window.__sesMsg){msg.textContent=window.__sesMsg;window.__sesMsg=null}
  m.appendChild(msg);return m}
 function search(){var m=h('div'),inp=h('input',{type:'search',value:SQ,placeholder:'ابحث عن كلمة',style:'width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);font-size:20px;font-family:inherit;direction:rtl;margin:0 0 10px'});
@@ -472,7 +472,7 @@ function nameDetail(m,i){var d=NMS[i],r=nres(i);
  if(!r.c.length&&!r.r.length&&!bq.length)m.appendChild(h('p',{class:'mute',text:'This name is not stated as a word in the Quran. It is usually taken from the meaning of other verses.'}));
  return m}
 function namesTab(){var m=h('div');
- if(!L||!W){m.appendChild(h('p',{class:'mute',style:'padding:24px 0;text-align:center',text:'Loading the Quran data…'}));return m}
+ if(!L||!W){m.appendChild(skel(8,1));return m}
  if(NV&&NV.length!==S.v.length){NV=null;NI=null;NR={}}
  if(!NI||!NR[NMS.length-1]){m.appendChild(h('p',{class:'mute',style:'padding:24px 0;text-align:center',text:'Preparing the names…'}));setTimeout(function(){ensureIdx();for(var i=0;i<NMS.length;i++)nres(i);if(S.tab==='names')render()},30);return m}
  if(NSEL!==null)return nameDetail(m,NSEL);
@@ -932,10 +932,14 @@ function openSheet(k){S.open=k;
   h("button",{class:"btn alt",text:inSes(k)?"In session ✓":"Add to session",onclick:function(){var v=ta.value;toggleSes(k);openSheet(k);document.querySelector('#sc textarea').value=v}}),h("button",{class:"btn alt",text:"Close",onclick:closeSheet})));
  document.getElementById("ov").style.display="block";document.getElementById("sheet").style.display="block"}
 function closeSheet(){S.open=null;document.getElementById("ov").style.display="none";document.getElementById("sheet").style.display="none"}
+function skel(rows,verse){var w=h('div',{class:'skw','aria-busy':'true'});if(verse)w.appendChild(h('div',{class:'sk skv'}));for(var i=0;i<(rows||5);i++)w.appendChild(h('div',{class:'sk skl',style:'width:'+(i%4===3?'58%':(88+(i*7)%12)+'%')}));return w}
+function tgl(sc,title,node){var ar=h('span',{text:' ▸',style:'font-weight:400;opacity:.6'}),hd=h('h2',{style:'margin-top:14px;cursor:pointer;user-select:none;-webkit-user-select:none'},h('span',{text:title}),ar);node.style.display='none';hd.onclick=function(){var o=node.style.display==='none';node.style.display=o?'':'none';ar.textContent=o?' ▾':' ▸'};sc.appendChild(hd);sc.appendChild(node)}
 /* ===== notes v2: edit/delete, auto-save on add-to-session, verse groups, inline verse references ===== */
 S.dr={};S.st=ld('qst',{});S.rv='s';S.sur=null;S.gm=false;S.gn=0;S.gs=0;S.ga=0;S.gopen=false;
 function tcase(t){return typeof t==='string'?t.replace(/(^|[\s\-\u2013\u2014\/(\[\u201c"])([a-z])/g,function(m,a,b){return a+b.toUpperCase()}):t}
-(function(){var _sv=sv;sv=function(k,v){try{if(k==='qn'&&Array.isArray(v))v.forEach(function(n){if(n&&n.title)n.title=tcase(n.title)});else if(k==='qst'&&v)Object.keys(v).forEach(function(x){v[x]=tcase(v[x])})}catch(e){}return _sv(k,v)};
+function sesSort(a){if(Array.isArray(a))a.sort(function(x,y){var p=String(x).split(':'),q=String(y).split(':');return (+p[0]-+q[0])||(+p[1]-+q[1])||0})}
+try{sesSort(S.ses)}catch(e){}
+(function(){var _sv=sv;sv=function(k,v){try{if(k==='qs')sesSort(v);if(k==='qn'&&Array.isArray(v))v.forEach(function(n){if(n&&n.title)n.title=tcase(n.title)});else if(k==='qst'&&v)Object.keys(v).forEach(function(x){v[x]=tcase(v[x])})}catch(e){}return _sv(k,v)};
  try{sv('qn',S.n);sv('qst',S.st)}catch(e){}})();
 var GI=null,PV=null;
 function gidx(){if(!GI){GI={};S.v.forEach(function(v,i){GI[v.k]=i})}return GI}
@@ -1026,8 +1030,7 @@ function openSheet(k){S.open=k;S.gopen=false;
  sc.appendChild(wordsP(k));
  sc.appendChild(h('div',{class:'mute',text:(/:0$/.test(k)?'':'Tap any word for its meaning · ')+(/:0$/.test(k)?'Notes on the whole surah':'Verse '+k)+' · today’s sitting: '+fmt(today())}));
  var tfr=h('div',{class:'row',style:'margin:0'});if(!/:0$/.test(k))tfr.appendChild(bmBtn(k));var tfb=tfBtn(k);if(tfb)tfr.appendChild(tfb);sc.appendChild(tfr);
- sc.appendChild(h('h2',{text:'Previous notes',style:'margin-top:14px'}));
- sc.appendChild(noteList(notesFor(k),true));
+ tgl(sc,'Previous notes',noteList(notesFor(k),true));
  var men=S.n.filter(function(n){return n.k!==k&&!(n.g&&n.g.indexOf(k)>=0)&&(n.refs||refsOf(n.text,n.k)).indexOf(k)>=0}).sort(function(a,b){return b.ts-a.ts});
  if(men.length){sc.appendChild(h('h2',{text:'Mentioned in notes on other verses',style:'margin-top:14px;font-size:16px'}));
   men.forEach(function(n){var t=n.text.replace(/⟦(\d+:\d+)⟧/g,'[$1]');sc.appendChild(h('div',{class:'note'},h('div',{class:'mute',text:fmt(n.date)+' · on '+glabel(n.g||[n.k])}),h('div',{text:t.length>160?t.slice(0,160)+'…':t}),h('button',{class:'chip',text:'Open '+n.k,onclick:function(){openSheet(n.k)}})))})}
@@ -1040,8 +1043,7 @@ function openGroup(keep){var g=gkeys();if(!g.length)return;S.open=null;S.gopen=t
  sc.appendChild(h('h2',{text:'Group of '+g.length+(g.length===1?' verse':' verses')}));
  g.forEach(function(x){sc.appendChild(h('div',{class:'gv big'},h('small',{text:vlabel(x)}),h('p',{class:'ar',text:vtext(x)})))});
  var prev=S.n.filter(function(n){return n.g&&n.g.length===g.length&&n.g[0]===g[0]}).sort(function(a,b){return b.ts-a.ts});
- sc.appendChild(h('h2',{text:'Previous notes on this group',style:'margin-top:14px'}));
- sc.appendChild(prev.length?noteList(prev,true):h('p',{class:'mute',text:'No notes on this exact group yet.'}));
+ tgl(sc,'Previous notes on this group',prev.length?noteList(prev,true):h('p',{class:'mute',text:'No notes on this exact group yet.'}));
  sc.appendChild(h('h2',{text:'New group note',style:'margin-top:14px;font-size:16px'}));
  sc.appendChild(editor({k:g[0],g:g}));
  document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block'}
@@ -1256,7 +1258,8 @@ function setSZ(z){var sc=document.getElementById('sc');if(!sc)return;szWrap();z=
 function shOpen(){var s=document.getElementById('sheet');return !!(s&&s.style.display&&s.style.display!=='none')}
 function isLand(){try{if(!matchMedia('(pointer:coarse)').matches)return false;if(screen.orientation&&screen.orientation.type)return /landscape/.test(screen.orientation.type);if(typeof window.orientation==='number')return Math.abs(window.orientation)===90}catch(e){}return false}
 function fitMode(){return !SCR&&ZF<=1.05&&!LL}
-function setZF(z){ZF=Math.max(.8,Math.min(3.5,z));document.documentElement.style.setProperty('--zf',ZF)}
+function zfAnc(){try{var xs=[.5,.8,.2,.65,.35],ys=[0,-30,30,-70,70,-120,120],cy=window.innerHeight/2;for(var j=0;j<ys.length;j++)for(var i=0;i<xs.length;i++){var e=document.elementFromPoint(window.innerWidth*xs[i],cy+ys[j]);if(e&&e.closest){var d=e.closest('.scp [data-k]');if(d)return{e:d,t:d.getBoundingClientRect().top}}}}catch(x){}return null}
+function setZF(z){var an=(S&&S.tab==='read'&&!shOpen())?zfAnc():null;ZF=Math.max(.8,Math.min(3.5,z));document.documentElement.style.setProperty('--zf',ZF);if(an&&an.e.isConnected){var dd=an.e.getBoundingClientRect().top-an.t;if(Math.abs(dd)>.5)window.scrollBy(0,dd)}}
 setZF(ZF);LL=isLand();
 (function(){
  var d0=0,z0=1,was=false,md='m',sa=null;
@@ -1350,7 +1353,7 @@ var CQ=null,CQP=null;
 function cqFetch(cb){if(!CQ&&window.CQD)CQ=window.CQD;if(CQ)return cb(CQ);if(!CQP)CQP=fetch('cquran.json').then(function(r){if(!r.ok)throw 0;return r.json()});CQP.then(function(j){CQ=j;cb(j)},function(){CQP=null;cb(null)})}
 function openCQ(k){var sc=document.getElementById('sc');window.__tfB=k;
  function shell(){document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block'}
- if(!CQ){sc.textContent='';sc.appendChild(h('h2',{text:'The Clear Quran'}));sc.appendChild(h('p',{class:'mute',text:'Loading…'}));shell();
+ if(!CQ){sc.textContent='';sc.appendChild(h('h2',{text:'The Clear Quran'}));sc.appendChild(skel(7,1));shell();
   cqFetch(function(j){if(!j){sc.textContent='';sc.appendChild(h('h2',{text:'The Clear Quran'}));sc.appendChild(h('p',{class:'mute',text:'Could not load cquran.json. Make sure it is uploaded next to index.html, then fully close and reopen the app.'}));sc.appendChild(h('div',{class:'row'},h('button',{class:'btn alt',text:'Close',onclick:function(){openSheet(k)}})));return}openCQ(k)});return}
  var a=k.split(':'),s=+a[0],v=+a[1],arr=CQ.v[s-1]||[],txt=arr[v-1]||'';sc.textContent='';
  sc.appendChild(h('h2',{text:'The Clear Quran'}));
@@ -1376,7 +1379,7 @@ function zHas(k){return !!zKeys()[k]}
 function zFetch(cb){if(!ZD&&window.ZLD)ZD=window.ZLD;if(ZD)return cb(ZD);if(!ZP)ZP=fetch('zilal.json').then(function(r){if(!r.ok)throw 0;return r.json()});ZP.then(function(j){ZD=j;cb(j)},function(){ZP=null;cb(null)})}
 function openZilal(k){var sc=document.getElementById('sc');window.__tfB=k;var T='\u0641\u064a \u0638\u0644\u0627\u0644 \u0627\u0644\u0642\u0631\u0622\u0646';
  function shell(){document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block'}
- if(!ZD){sc.textContent='';sc.appendChild(h('h2',{text:T}));sc.appendChild(h('p',{class:'mute',text:'Loading\u2026'}));shell();
+ if(!ZD){sc.textContent='';sc.appendChild(h('h2',{text:T}));sc.appendChild(skel(7,1));shell();
   zFetch(function(j){if(!j){sc.textContent='';sc.appendChild(h('h2',{text:T}));sc.appendChild(h('p',{class:'mute',text:'Could not load zilal.json. Make sure it is uploaded next to index.html, then fully close and reopen the app.'}));sc.appendChild(h('div',{class:'row'},h('button',{class:'btn alt',text:'Close',onclick:function(){openSheet(k)}})));return}openZilal(k)});return}
  var a=k.split(':'),n=+a[1],g=ZD.g[ZD.v[k]];sc.textContent='';
  var whole=window.__zlW===k;
@@ -1422,7 +1425,7 @@ function tfBtn(k){var zero=/:0$/.test(k),ar=tfHas(k);if(zero){var zs=h('span',{}
  w.appendChild(b);w.appendChild(m);return w}
 function tfNext(k,d){var a=k.split(':'),s=+a[0],v=+a[1]+d;var c=s+':'+v;if(tfHas(c))return c;return null}
 function openTafsir(k){var sc=document.getElementById('sc');window.__tfB=k;
- if(!TF){sc.textContent='';sc.appendChild(h('h2',{text:'Tafsir al-Tahrir wa al-Tanwir'}));sc.appendChild(h('p',{class:'mute',text:'Loading\u2026'}));document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block';
+ if(!TF){sc.textContent='';sc.appendChild(h('h2',{text:'Tafsir al-Tahrir wa al-Tanwir'}));sc.appendChild(skel(7,1));document.getElementById('ov').style.display='block';document.getElementById('sheet').style.display='block';
   tfFetch(function(j){if(!j){sc.textContent='';sc.appendChild(h('h2',{text:'Tafsir al-Tahrir wa al-Tanwir'}));sc.appendChild(h('p',{class:'mute',text:'Could not load the tafsir data. Missing or failed: '+(TFE||'tafsir.json')+'. Make sure every tafsir file (tafsir.json, tafsir2.json, tafsir3.json, tafsir4.json, tafsir5.json) is uploaded next to index.html, then fully close and reopen the app.'}));sc.appendChild(h('div',{class:'row'},h('button',{class:'btn alt',text:'Close',onclick:function(){openSheet(k)}})));return}openTafsir(k)});return}
  var t=TF;sc.textContent='';var ix=t.v[k]||[];
  var a=k.split(':'),ttl=+a[1]?sname(+a[0])+' · '+k:sname(+a[0])+' · Introduction';
@@ -1667,7 +1670,7 @@ P.push([/^(\d+) verses? found\. Tap one to insert it\.$/,function(m){return 'ت�
 P.push([/^Merged (\d+) sessions\.$/,function(m){return 'تم دمج '+m[1]+' جلسات.'}]);
 P.push([/^Duplicated (\d+) sessions\.$/,function(m){return 'تم تكرار '+m[1]+' جلسات.'}]);
 P.push([/^Copied (\d+) sessions to the clipboard\.$/,function(m){return 'تم نسخ '+m[1]+' جلسات إلى الحافظة.'}]);
-P.push([/^Saved on (\d+) verses\.$/,function(m){return 'تم الحفظ على '+m[1]+' آية.'}]);
+P.push([/^Save as one note on (\d+) verses$/,function(m){return 'احفظ كملاحظة واحدة على '+m[1]+' آية'}]);P.push([/^Saved as one note on (\d+) verses\.$/,function(m){return 'تم الحفظ كملاحظة واحدة على '+m[1]+' آية.'}]);P.push([/^Saved on (\d+) verses\.$/,function(m){return 'تم الحفظ على '+m[1]+' آية.'}]);
 function tr(s){var t=s.trim();if(!t)return s;var o=D[t];if(o===undefined&&t.indexOf(' · ')>0&&/^(\d+ (verses?|related|hadith)|not stated)( · .*)*$/.test(t)){o=t.split(' · ').map(function(x){var y=tr(x);return y}).join(' · ')}if(o===undefined)for(var i=0;i<P.length;i++){var m=t.match(P[i][0]);if(m){o=P[i][1](m);break}}
  if(o===undefined)return s;var lead=s.match(/^\s*/)[0],trail=s.match(/\s*$/)[0];return lead+nd(o)+trail}
 window.tr=tr;
