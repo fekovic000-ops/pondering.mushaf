@@ -183,7 +183,7 @@ body.rd nav{position:relative;z-index:50}
 .ui-ar h2,.ui-ar h3,.ui-ar .ntt{text-transform:none}h2,h3,.ntt{text-transform:capitalize}
 @media (min-width:700px) and (orientation:landscape){main,body.rd main{max-width:none!important}.scr{max-width:none!important;width:100%!important}.scw{max-width:none!important;width:100%!important;padding:4px 4vw 100px!important;box-sizing:border-box}.scp{font-size:calc(clamp(34px,4.3vw,64px)*var(--zf,1))!important}}
 @media (min-width:700px) and (min-height:700px){.scp{font-size:calc(clamp(34px,4.3vw,60px)*var(--zf,1))}.scw{padding:4px 5vw 100px!important}main{max-width:none}body.rd main{max-width:none}.scw{max-width:none!important}#sheet{width:min(100%,760px)!important;font-size:15.5px!important}#sheet .ar{font-size:26px!important}#sheet .tfx p{font-size:20px!important}.tb .tt b{font-size:20px}}
-#sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.skw{padding:8px 2px}.sk{border-radius:8px;background:linear-gradient(90deg,rgba(128,128,128,.14) 25%,rgba(128,128,128,.28) 37%,rgba(128,128,128,.14) 63%);background-size:400% 100%;animation:skm 1.3s ease infinite}.skl{height:14px;margin:12px 0}.skv{height:64px;margin:6px 0 18px}@keyframes skm{0%{background-position:100% 50%}100%{background-position:0 50%}}@media (prefers-reduced-motion:reduce){.sk{animation:none}}textarea,input[type=text],input[type=search],input:not([type]),select{font-size:16px!important}#ov{touch-action:none}.scr .pgn{font-size:clamp(14px,2.2vw,20px)!important;padding:2px 14px!important;min-width:0!important;margin:10px auto 90px!important}
+#sheet{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}[data-k]{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.skw{padding:8px 2px}.sk{border-radius:8px;background:linear-gradient(90deg,rgba(128,128,128,.14) 25%,rgba(128,128,128,.28) 37%,rgba(128,128,128,.14) 63%);background-size:400% 100%;animation:skm 1.3s ease infinite}.skl{height:14px;margin:12px 0}.skv{height:64px;margin:6px 0 18px}@keyframes skm{0%{background-position:100% 50%}100%{background-position:0 50%}}@media (prefers-reduced-motion:reduce){.sk{animation:none}}textarea,input[type=text],input[type=search],input:not([type]),select{font-size:16px!important}#ov{touch-action:none}.scr .pgn{font-size:clamp(14px,2.2vw,20px)!important;padding:2px 14px!important;min-width:0!important;margin:10px auto 90px!important}
 
 #sheet>#szw{max-width:none!important}
 </style>
@@ -1374,6 +1374,33 @@ function openCQ(k){var sc=document.getElementById('sc');window.__tfB=k;
  sc.appendChild(h('div',{class:'row'},h('button',{class:'btn alt',text:'Close',onclick:function(){openSheet(k)}})));
  shell();sc.scrollTop=0}
 
+/* long-press a verse: Arabic on its own, English translation below */
+function closeVerse(){var o=document.getElementById('vfs');if(o)o.remove()}
+function openVerse(k){var a=k.split(':'),s=+a[0],v=+a[1];closeVerse();
+ var o=h('div',{id:'vfs',style:'position:fixed;inset:0;z-index:100000;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 7vw 70px;box-sizing:border-box;overflow:auto;-webkit-overflow-scrolling:touch'});
+ var x=h('button',{class:'btn alt',text:'✕',style:'position:fixed;top:14px;right:14px;width:44px;height:44px;border-radius:22px;padding:0;font-size:20px;line-height:1',onclick:closeVerse});
+ var ref=h('div',{class:'mute',style:'position:fixed;top:22px;left:0;right:0;text-align:center;font-size:14px;pointer-events:none',text:sname(s)+' · '+k});
+ var box=h('div',{style:'margin:auto 0;width:100%;max-width:900px;text-align:center'});
+ var ar=h('p',{class:'ar',style:'font-size:clamp(28px,6vw,54px)!important;line-height:2.2;margin:0 0 22px;text-align:center;direction:rtl',text:vtext(k)});
+ var en=h('p',{dir:'ltr',style:'direction:ltr;text-align:center;font-size:clamp(17px,3.2vw,26px);line-height:1.7;margin:0;border-top:1px solid var(--line);padding-top:20px',text:''});
+ box.appendChild(ar);box.appendChild(en);o.appendChild(box);
+ var nav=h('div',{style:'position:fixed;bottom:16px;left:0;right:0;display:flex;justify-content:center;gap:14px'});
+ if(v>1)nav.appendChild(h('button',{class:'btn alt mini',text:'› '+s+':'+(v-1),onclick:function(){openVerse(s+':'+(v-1))}}));
+ nav.appendChild(h('button',{class:'btn alt mini',text:'Notes',onclick:function(){closeVerse();openSheet(k)}}));
+ nav.appendChild(h('button',{class:'btn alt mini',text:s+':'+(v+1)+' ‹',onclick:function(){openVerse(s+':'+(v+1))}}));
+ o.appendChild(x);o.appendChild(ref);o.appendChild(nav);
+ document.body.appendChild(o);
+ function fill(){var arr=CQ.v[s-1]||[];en.textContent=(arr[v-1]||'').replace(/\s*\[\d+\]/g,'')||'—';if(v>=arr.length){var b=nav.lastChild;if(b&&b.textContent.indexOf(':'+(v+1))>0)b.remove()}}
+ if(CQ)fill();else{en.appendChild(skel(3));cqFetch(function(j){if(!document.getElementById('vfs'))return;en.textContent='';if(j)fill();else en.textContent='The English translation could not be loaded.'})}}
+(function(){var tm=null,sx=0,sy=0,last=0,tk=null;
+ function keyOf(e){var t=e.target;if(!t||!t.closest||t.closest('#sheet,#ov,.tfm,button,input,textarea'))return null;var d=t.closest('[data-k]');return d?d.getAttribute('data-k'):null}
+ function stop(){clearTimeout(tm);tm=null}
+ document.addEventListener('touchstart',function(e){stop();if(e.touches.length!==1)return;var k=keyOf(e);if(!k||!/^\d+:\d+$/.test(k))return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;tk=k;tm=setTimeout(function(){tm=null;last=Date.now();try{navigator.vibrate&&navigator.vibrate(15)}catch(x){}openVerse(tk)},1000)},{passive:true,capture:true});
+ document.addEventListener('touchmove',function(e){if(!tm)return;var t=e.touches[0];if(Math.abs(t.clientX-sx)>10||Math.abs(t.clientY-sy)>10)stop()},{passive:true,capture:true});
+ document.addEventListener('touchend',stop,{passive:true,capture:true});document.addEventListener('touchcancel',stop,{passive:true,capture:true});
+ document.addEventListener('click',function(e){if(Date.now()-last<700){e.stopPropagation();e.preventDefault()}},true);
+ document.addEventListener('contextmenu',function(e){var k=keyOf(e);if(k&&/^\d+:\d+$/.test(k)){e.preventDefault();last=Date.now();openVerse(k)}},true)})();
+
 
 /* Fi Zilal al-Quran (Sayyid Qutb) - Surat al-Baqarah first */
 var ZD=null,ZP=null,ZK=null;
@@ -1675,7 +1702,7 @@ P.push([/^(\d+) verses? found\. Tap one to insert it\.$/,function(m){return 'ت�
 P.push([/^Merged (\d+) sessions\.$/,function(m){return 'تم دمج '+m[1]+' جلسات.'}]);
 P.push([/^Duplicated (\d+) sessions\.$/,function(m){return 'تم تكرار '+m[1]+' جلسات.'}]);
 P.push([/^Copied (\d+) sessions to the clipboard\.$/,function(m){return 'تم نسخ '+m[1]+' جلسات إلى الحافظة.'}]);
-Object.assign(D,{'Delete':'حذف','Delete selected':'حذف المحدد'});P.push([/^Tap again to delete (\d+)$/,function(m){return 'اضغط مرة أخرى لحذف '+m[1]}]);P.push([/^Deleted (\d+) sessions\.$/,function(m){return 'تم حذف '+m[1]+' جلسات.'}]);P.push([/^Save as one note on (\d+) verses$/,function(m){return 'احفظ كملاحظة واحدة على '+m[1]+' آية'}]);P.push([/^Saved as one note on (\d+) verses\.$/,function(m){return 'تم الحفظ كملاحظة واحدة على '+m[1]+' آية.'}]);P.push([/^Saved on (\d+) verses\.$/,function(m){return 'تم الحفظ على '+m[1]+' آية.'}]);
+Object.assign(D,{'Notes & more':'الملاحظات والمزيد','The English translation could not be loaded.':'تعذر تحميل الترجمة الإنجليزية.','Delete':'حذف','Delete selected':'حذف المحدد'});P.push([/^Tap again to delete (\d+)$/,function(m){return 'اضغط مرة أخرى لحذف '+m[1]}]);P.push([/^Deleted (\d+) sessions\.$/,function(m){return 'تم حذف '+m[1]+' جلسات.'}]);P.push([/^Save as one note on (\d+) verses$/,function(m){return 'احفظ كملاحظة واحدة على '+m[1]+' آية'}]);P.push([/^Saved as one note on (\d+) verses\.$/,function(m){return 'تم الحفظ كملاحظة واحدة على '+m[1]+' آية.'}]);P.push([/^Saved on (\d+) verses\.$/,function(m){return 'تم الحفظ على '+m[1]+' آية.'}]);
 function tr(s){var t=s.trim();if(!t)return s;var o=D[t];if(o===undefined&&t.indexOf(' · ')>0&&/^(\d+ (verses?|related|hadith)|not stated)( · .*)*$/.test(t)){o=t.split(' · ').map(function(x){var y=tr(x);return y}).join(' · ')}if(o===undefined)for(var i=0;i<P.length;i++){var m=t.match(P[i][0]);if(m){o=P[i][1](m);break}}
  if(o===undefined)return s;var lead=s.match(/^\s*/)[0],trail=s.match(/\s*$/)[0];return lead+nd(o)+trail}
 window.tr=tr;
